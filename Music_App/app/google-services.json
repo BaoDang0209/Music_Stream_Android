@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "50154209108",
+    "project_id": "music-stream-ef950",
+    "storage_bucket": "music-stream-ef950.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50154209108:android:6c3ca18c383257be5492c1",
+        "android_client_info": {
+          "package_name": "com.example.music_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOOBjLTD0GjEsaHbWCzuyfanTH76lQbno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50154209108:android:4f3e0aa0199a559d5492c1",
+        "android_client_info": {
+          "package_name": "com.example.music_stream"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOOBjLTD0GjEsaHbWCzuyfanTH76lQbno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
