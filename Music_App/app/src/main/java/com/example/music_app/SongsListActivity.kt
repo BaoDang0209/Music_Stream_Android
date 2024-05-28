@@ -16,7 +16,7 @@ class SongsListActivity : AppCompatActivity() {
     }
         lateinit var  binding: ActivitySongsListBinding
         lateinit var songsListAdapter: SongsListAdapter
-
+        // Create list music
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySongsListBinding.inflate(layoutInflater)
@@ -31,7 +31,7 @@ class SongsListActivity : AppCompatActivity() {
 
         setupSongsListRecyclerView()
     }
-
+    // Show list music in recycler view
     fun setupSongsListRecyclerView(){
         songsListAdapter = SongsListAdapter(category.songs)
         binding.songsListRecyclerView.layoutManager = LinearLayoutManager(this)

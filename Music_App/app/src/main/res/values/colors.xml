@@ -4,4 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blueDark">#040D43</color>
     <color name="textWhite">#C3C4CA</color>
+    <color name="skin_color">#F6BCF3</color>
+    <color name="textDark">#2F386E</color>
+    <color name="silver">#98C1C6</color>
+    <color name="red">#EF0318</color>
+
 </resources>

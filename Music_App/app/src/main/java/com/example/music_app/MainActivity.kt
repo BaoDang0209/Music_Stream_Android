@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        // Show categories and sections in main page
         getCategories()
         setupSection("section_1",binding.section1MainLayout,binding.section1Title,binding.section1RecyclerView)
         setupSection("section_2",binding.section2MainLayout,binding.section2Title,binding.section2RecyclerView)
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
+    //  Show all menu items when the menu pops up
     fun showPopupMenu(){
 
         val popupMenu = PopupMenu(this,binding.optionBtn)
@@ -59,22 +59,29 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
             }
+            when(it.itemId){
+                R.id.profile -> {
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+            }
             false
         }
-
-
     }
+    // Funcion of logout
     fun logout(){
         MyExoplayer.getInstance()?.release()
         FirebaseAuth.getInstance().signOut()
         startActivity(Intent(this,LoginActivity::class.java))
         finish()
     }
+    //Resume music below main page
     override fun onResume() {
         super.onResume()
         showPlayerView()
     }
-
+    // Show music below main page
     fun showPlayerView(){
         binding.playerView.setOnClickListener {
             startActivity(Intent(this,PlayerActivity::class.java))
@@ -98,12 +105,13 @@ class MainActivity : AppCompatActivity() {
                 setupCategoryRecyclerView(categoryList)
             }
     }
+    // Set up categories
     fun setupCategoryRecyclerView(categoryList:List<CategoryModel>){
         categoryAdapter = CategoryAdapter(categoryList)
         binding.categoriesRecyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         binding.categoriesRecyclerView.adapter = categoryAdapter
     }
-    //Sections
+    //Set up all Sections ( K-Pop , V-Pop ,...)
     fun setupSection(id : String,mainLayout : RelativeLayout,titleView : TextView,recyclerView: RecyclerView){
         FirebaseFirestore.getInstance().collection("sections")
             .document(id)
@@ -122,7 +130,7 @@ class MainActivity : AppCompatActivity() {
             }
 
     }
-
+    // Show all music that has been clicked to listen
     fun setupMostlyPlayed(id : String,mainLayout : RelativeLayout,titleView : TextView,recyclerView: RecyclerView){
         FirebaseFirestore.getInstance().collection("sections")
             .document(id)

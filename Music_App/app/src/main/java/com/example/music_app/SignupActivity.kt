@@ -38,6 +38,7 @@ class SignupActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+
             createAccountWithFirebase(email,password)
 
 

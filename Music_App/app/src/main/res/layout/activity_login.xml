@@ -64,6 +64,7 @@
             android:inputType="textPassword"
             android:background="@drawable/rounded_corner"
             android:id="@+id/password_edittext"/>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="20dp"/>
