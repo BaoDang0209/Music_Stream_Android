@@ -3,7 +3,9 @@ package com.example.music_app
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.OptIn
 import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import com.bumptech.glide.Glide
 import com.example.music_app.databinding.ActivityPlayerBinding
@@ -20,6 +22,7 @@ class PlayerActivity : AppCompatActivity() {
             showGif(isPlaying)
         }
     }
+    @OptIn(UnstableApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayerBinding.inflate(layoutInflater)
@@ -40,6 +43,9 @@ class PlayerActivity : AppCompatActivity() {
             exoPlayer.addListener(playerListener)
 
 
+        }
+        binding.backBtn.setOnClickListener{
+            finish()
         }
     }
     override fun onDestroy() {

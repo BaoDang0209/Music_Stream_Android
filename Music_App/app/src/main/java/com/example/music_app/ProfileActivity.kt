@@ -45,6 +45,9 @@ class ProfileActivity : AppCompatActivity() {
             val intent = Intent(this, ChangePasswordActivity::class.java)
             startActivity(intent)
         }
+        binding.backBtn.setOnClickListener{
+            finish()
+        }
 
         showUserInformation()
     }
