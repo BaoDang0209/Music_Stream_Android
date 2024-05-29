@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.music_app.databinding.ActivitySignupBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import java.util.regex.Pattern
 
 class SignupActivity : AppCompatActivity() {
@@ -57,6 +58,20 @@ class SignupActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 setInProgress(false)
                 Toast.makeText(applicationContext,"User created successfully",Toast.LENGTH_SHORT).show()
+                // Save user information in Firebase Realtime Database
+                val userId = it.user?.uid ?: ""
+                val userRef = FirebaseDatabase.getInstance("https://music-stream-ef950-default-rtdb.asia-southeast1.firebasedatabase.app").reference.child("users").child(userId)
+                val userInfo = hashMapOf(
+                    "email" to email
+                )
+                userRef.setValue(userInfo)
+                    .addOnSuccessListener {
+                        Toast.makeText(this,"Add user successfully",Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this,"Add user failed",Toast.LENGTH_SHORT).show()
+                    }
+
                 finish()
             }.addOnFailureListener {
                 setInProgress(false)
