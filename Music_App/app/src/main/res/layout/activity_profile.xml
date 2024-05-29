@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/skin_color"
+    android:background="@color/blueDark"
     tools:context=".ProfileActivity">
 
 
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Information"
-            android:textColor="@color/textDark"
+            android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:background="@color/textDark"/>
+            android:background="@color/white"/>
 
     </LinearLayout>
 
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:text="Full Name:"
             android:textStyle="bold"
-            android:textColor="@color/textDark"
+            android:textColor="@color/white"
             android:textSize="18dp"
             android:layout_marginLeft="5dp" />
         <EditText
@@ -66,7 +66,7 @@
             android:textColorHint="@color/silver"
             android:layout_marginLeft="25dp"
             android:textSize="18dp"
-            android:textColor="@color/textDark"/>
+            android:textColor="@color/white"/>
 
 
 
@@ -75,7 +75,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/textDark"
+        android:background="@color/white"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"/>
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:text="Phone"
             android:textStyle="bold"
-            android:textColor="@color/textDark"
+            android:textColor="@color/white"
             android:textSize="18dp"
             android:layout_marginLeft="5dp" />
         <EditText
@@ -109,7 +109,7 @@
             android:textColorHint="@color/silver"
             android:layout_marginLeft="25dp"
             android:textSize="18dp"
-            android:textColor="@color/textDark"/>
+            android:textColor="@color/white"/>
 
 
 
@@ -118,7 +118,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/textDark"
+        android:background="@color/white"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"/>
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:text="Email:"
             android:textStyle="bold"
-            android:textColor="@color/textDark"
+            android:textColor="@color/white"
             android:textSize="18dp"
             android:layout_marginLeft="5dp" />
         <EditText
@@ -151,7 +151,7 @@
             android:textColorHint="@color/silver"
             android:layout_marginLeft="25dp"
             android:textSize="18dp"
-            android:textColor="@color/textDark"/>
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 
@@ -160,7 +160,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/textDark"
+        android:background="@color/white"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"/>
@@ -179,19 +179,20 @@
             android:background="@drawable/bg_btn"
             android:text="Update Information "
             android:gravity="center"
-            android:textColor="@color/textDark"
+            android:textColor="@color/white"
             android:textSize="18dp"
             android:drawableLeft="@drawable/ic_edit"
             android:paddingLeft="10dp"
             android:layout_marginLeft="-10dp"/>
 
         <TextView
+            android:id="@+id/changePassword"
             android:layout_width="240dp"
             android:layout_height="50dp"
             android:background="@drawable/bg_btn"
             android:text="Change Password "
             android:gravity="center"
-            android:textColor="@color/textDark"
+            android:textColor="@color/white"
             android:textSize="18dp"
             android:drawableLeft="@drawable/ic_lock"
             android:paddingLeft="30dp"

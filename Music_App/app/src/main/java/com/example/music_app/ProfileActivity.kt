@@ -40,6 +40,11 @@ class ProfileActivity : AppCompatActivity() {
         binding.saveData.setOnClickListener {
             validateData()
         }
+        //Handle event node update records
+        binding.changePassword.setOnClickListener{
+            val intent = Intent(this, ChangePasswordActivity::class.java)
+            startActivity(intent)
+        }
 
         showUserInformation()
     }
