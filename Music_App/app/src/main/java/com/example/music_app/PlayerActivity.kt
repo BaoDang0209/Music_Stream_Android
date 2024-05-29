@@ -7,6 +7,7 @@ import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.bumptech.glide.Glide
 import com.example.music_app.databinding.ActivityPlayerBinding
+import com.example.music_app.utils.MyExoplayer
 
 class PlayerActivity : AppCompatActivity() {
 

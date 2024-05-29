@@ -7,10 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.example.music_app.MyExoplayer
+import com.example.music_app.utils.MyExoplayer
 import com.example.music_app.PlayerActivity
 import com.example.music_app.databinding.SectionSongListRecyclerRowBinding
-import com.example.music_app.databinding.SongListItemRecyclerRowBinding
 import com.example.music_app.models.SongModel
 import com.google.firebase.firestore.FirebaseFirestore
 

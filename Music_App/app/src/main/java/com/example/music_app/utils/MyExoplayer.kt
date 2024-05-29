@@ -1,4 +1,4 @@
-package com.example.music_app
+package com.example.music_app.utils
 
 import android.content.Context
 import androidx.media3.common.MediaItem
@@ -18,10 +18,10 @@ object MyExoplayer {
         return exoPlayer
     }
     fun startPlaying(context : Context, song : SongModel){
-        if(exoPlayer==null)
+        if(exoPlayer ==null)
             exoPlayer = ExoPlayer.Builder(context).build()
 
-        if(currentSong!=song){
+        if(currentSong !=song){
             //Its a new song so start playing
             currentSong = song
 
@@ -37,7 +37,7 @@ object MyExoplayer {
 
     }
     fun updateCount(){
-        currentSong?.id?.let {id->
+        currentSong?.id?.let { id->
             FirebaseFirestore.getInstance().collection("songs")
                 .document(id)
                 .get().addOnSuccessListener {

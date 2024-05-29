@@ -15,13 +15,12 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.music_app.adapter.CategoryAdapter
 import com.example.music_app.adapter.SectionSongListAdapter
 import com.example.music_app.databinding.ActivityMainBinding
-import com.example.music_app.databinding.CategoryItemRecyclerRowBinding
 import com.example.music_app.models.CategoryModel
 import com.example.music_app.models.SongModel
+import com.example.music_app.utils.MyExoplayer
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.toObject
 import com.google.firebase.firestore.toObjects
 
 
