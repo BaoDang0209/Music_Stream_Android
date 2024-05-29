@@ -1,5 +1,6 @@
 package com.example.music_app
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -35,7 +36,7 @@ class ProfileActivity : AppCompatActivity() {
         binding.imgAvt.setOnClickListener {
             selectImage.launch("image/*")
         }
-
+        //Handle event node update records
         binding.saveData.setOnClickListener {
             validateData()
         }
@@ -77,52 +78,52 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun storeData(imageUrl: String) {
+        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+        val userRef = FirebaseDatabase.getInstance("https://music-stream-ef950-default-rtdb.asia-southeast1.firebasedatabase.app")
+            .reference.child("users").child(userId)
+
         val data = UserModel(
             fullname = binding.userName.text.toString(),
-            email = binding.userEmail.text.toString(),
+            email = FirebaseAuth.getInstance().currentUser!!.email ?: "",
             phone = binding.userPhone.text.toString(),
             image = imageUrl
         )
-        FirebaseDatabase.getInstance("https://music-stream-ef950-default-rtdb.asia-southeast1.firebasedatabase.app")
-            .reference.child("users")
-            .child(FirebaseAuth.getInstance().currentUser!!.phoneNumber!!)
-            .setValue(data).addOnCompleteListener {
-                Config.hideDialog()
-                if (it.isSuccessful) {
-                    Toast.makeText(this, "Update Successful!", Toast.LENGTH_SHORT).show()
-                    showUserInformation() // Refresh the displayed information after updating
-                } else {
-                    Toast.makeText(this, it.exception!!.message, Toast.LENGTH_SHORT).show()
-                }
+
+        userRef.setValue(data).addOnCompleteListener {
+            Config.hideDialog()
+            if (it.isSuccessful) {
+                Toast.makeText(this, "Update Successful!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, it.exception!!.message, Toast.LENGTH_SHORT).show()
             }
+        }
     }
 
     private fun showUserInformation() {
-        val user = FirebaseAuth.getInstance().currentUser
-        user?.let {
-            FirebaseDatabase.getInstance("https://music-stream-ef950-default-rtdb.asia-southeast1.firebasedatabase.app")
-                .reference.child("users")
-                .child(it.phoneNumber!!)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val userModel = snapshot.getValue(UserModel::class.java)
-                        if (userModel != null) {
-                            binding.userName.setText(userModel.fullname)
-                            binding.userEmail.setText(userModel.email)
-                            binding.userPhone.setText(userModel.phone)
-                            if (userModel.image != null && !isDestroyed) {
-                                Glide.with(this@ProfileActivity)
-                                    .load(userModel.image)
-                                    .apply(RequestOptions.circleCropTransform())
-                                    .into(binding.imgAvt)
-                            }
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        FirebaseDatabase.getInstance("https://music-stream-ef950-default-rtdb.asia-southeast1.firebasedatabase.app")
+            .reference.child("users")
+            .child(userId)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val userModel = snapshot.getValue(UserModel::class.java)
+                    if (userModel != null) {
+                        binding.userName.setText(userModel.fullname)
+                        binding.userEmail.setText(userModel.email)
+                        binding.userPhone.setText(userModel.phone)
+                        if (userModel.image != null && !isDestroyed) {
+                            Glide.with(this@ProfileActivity)
+                                .load(userModel.image)
+                                .apply(RequestOptions.circleCropTransform())
+                                .into(binding.imgAvt)
                         }
                     }
+                }
 
-                    override fun onCancelled(error: DatabaseError) {
-                        Toast.makeText(this@ProfileActivity, error.message, Toast.LENGTH_SHORT).show()
-                    }
-                })
-        }
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(this@ProfileActivity, error.message, Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 }
