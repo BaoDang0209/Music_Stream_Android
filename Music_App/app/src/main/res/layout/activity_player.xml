@@ -23,7 +23,7 @@
             android:layout_centerVertical="true"/>
 
         <ImageView
-            android:id="@+id/favoristBtn"
+            android:id="@+id/favoriteBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_favorite"
@@ -86,13 +86,7 @@
         android:layout_marginTop="8dp"
         app:hide_on_touch="false"
         app:show_timeout="0"
-
         android:id="@+id/player_view"
         />
-
-
-
-
-
 
 </LinearLayout>

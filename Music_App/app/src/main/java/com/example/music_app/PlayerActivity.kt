@@ -24,6 +24,7 @@ class PlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlayerBinding
     private lateinit var exoPlayer: ExoPlayer
+    private var isFavorite = false
 
     private val database = FirebaseDatabase.getInstance("https://music-stream-ef950-default-rtdb.asia-southeast1.firebasedatabase.app")
     private val auth = FirebaseAuth.getInstance()
@@ -60,15 +61,23 @@ class PlayerActivity : AppCompatActivity() {
             binding.playerView.player = exoPlayer
             binding.playerView.showController()
             exoPlayer.addListener(playerListener)
+
+            // Check if the current song is already in the favorites
+            checkIfFavorite(currentSong)
         }
 
         binding.backBtn.setOnClickListener {
             finish()
         }
 
-        binding.favoristBtn.setOnClickListener {
-            Log.d("PlayerActivity", "Favorite button clicked")
-            fetchSongDataAndAddToFavorites()
+        binding.favoriteBtn.setOnClickListener {
+            MyExoplayer.getCurrentSong()?.let { currentSong ->
+                if (isFavorite) {
+                    removeSongFromFavorites(currentSong)
+                } else {
+                    addSongToFavorites(currentSong)
+                }
+            }
         }
     }
 
@@ -81,52 +90,58 @@ class PlayerActivity : AppCompatActivity() {
         binding.songGifImageView.visibility = if (show) View.VISIBLE else View.INVISIBLE
     }
 
-    private fun fetchSongDataAndAddToFavorites() {
-        val currentUser = auth.currentUser
-
-        if (currentUser == null) {
-            showToast("User not logged in")
-            return
-        }
+    private fun checkIfFavorite(song: SongModel) {
+        val currentUser = auth.currentUser ?: return
 
         val userId = currentUser.uid
-        val userRef = database.getReference("users").child(userId)
+        val userRef = database.getReference("users").child(userId).child("favoritesongs")
 
-        val currentSong = MyExoplayer.getCurrentSong()
-        if (currentSong == null) {
-            showToast("No song currently playing")
-            return
-        }
-
-        // Fetch the song URL from Firebase Storage
-        storage.getReferenceFromUrl(currentSong.url).downloadUrl.addOnSuccessListener { uri ->
-            val favoriteSong = SongModel(
-                id = "song_${System.currentTimeMillis()}",
-                title = currentSong.title,
-                subtitle = currentSong.subtitle,
-                url = uri.toString(),
-                coverUrl = currentSong.coverUrl
-            )
-
-            // Update user's favorite songs in Firebase Realtime Database
-            userRef.get().addOnSuccessListener { dataSnapshot ->
-                val user = dataSnapshot.getValue(UserModel::class.java)
-                val updatedFavorites = user?.favoritesongs?.toMutableList() ?: mutableListOf()
-                updatedFavorites.add(favoriteSong)
-
-                userRef.child("favoritesongs").setValue(updatedFavorites)
-                    .addOnSuccessListener {
-                        showToast("Added to favorites!")
-                    }
-                    .addOnFailureListener { error ->
-                        showToast("Failed to add to favorites: ${error.message}")
-                    }
-            }.addOnFailureListener { error ->
-                showToast("Failed to fetch user data: ${error.message}")
-            }
+        userRef.child(song.id).get().addOnSuccessListener { dataSnapshot ->
+            isFavorite = dataSnapshot.exists()
+            updateFavoriteIcon()
         }.addOnFailureListener { error ->
-            showToast("Failed to fetch song data: ${error.message}")
+            Log.e("PlayerActivity", "Error checking if song is favorite: ${error.message}")
         }
+    }
+
+    private fun addSongToFavorites(song: SongModel) {
+        val currentUser = auth.currentUser ?: return
+
+        val userId = currentUser.uid
+        val userRef = database.getReference("users").child(userId).child("favoritesongs")
+
+        userRef.child(song.id).setValue(song)
+            .addOnSuccessListener {
+                isFavorite = true
+                updateFavoriteIcon()
+                showToast("Added to favorites!")
+            }
+            .addOnFailureListener { error ->
+                showToast("Failed to add to favorites: ${error.message}")
+            }
+    }
+
+    private fun removeSongFromFavorites(song: SongModel) {
+        val currentUser = auth.currentUser ?: return
+
+        val userId = currentUser.uid
+        val userRef = database.getReference("users").child(userId).child("favoritesongs")
+
+        userRef.child(song.id).removeValue()
+            .addOnSuccessListener {
+                isFavorite = false
+                updateFavoriteIcon()
+                showToast("Removed from favorites!")
+            }
+            .addOnFailureListener { error ->
+                showToast("Failed to remove from favorites: ${error.message}")
+            }
+    }
+
+    private fun updateFavoriteIcon() {
+        binding.favoriteBtn.setImageResource(
+            if (isFavorite) R.drawable.ic_favorite_done else R.drawable.ic_favorite
+        )
     }
 
     private fun showToast(message: String) {
