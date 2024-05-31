@@ -30,6 +30,9 @@ class SongsListActivity : AppCompatActivity() {
 
 
         setupSongsListRecyclerView()
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
     }
     // Show list music in recycler view
     fun setupSongsListRecyclerView(){

@@ -8,7 +8,8 @@
     android:background="@color/black"
     android:padding="16dp"
     android:gravity="center_horizontal"
-    tools:context=".SongsListActivity">
+    tools:context=".FavoristListActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,35 +21,35 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_back"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"/>
-
+            android:layout_centerVertical="true"
+            android:contentDescription="Back Button" />
     </RelativeLayout>
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_margin="16dp"
-        android:id="@+id/cover_image_view"/>
+        android:background="@drawable/ic_favoristsongs"
+        android:contentDescription="Favorite Songs Image" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Hindi"
+        android:text="Favorite Songs"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:gravity="center"
-        android:id="@+id/name_text_view"/>
+        android:textStyle="bold" />
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="1dp"
         app:dividerColor="@color/textWhite"
-        android:layout_marginVertical="8dp"/>
+        android:layout_marginVertical="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favoritelistRecyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/songs_list_recycler_view"/>
-
-
+        android:scrollbars="vertical" />
 </LinearLayout>

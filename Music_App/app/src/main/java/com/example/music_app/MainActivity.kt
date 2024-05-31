@@ -65,6 +65,13 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
             }
+            when(it.itemId){
+                R.id.favories -> {
+                    val intent = Intent(this, FavoristListActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+            }
             false
         }
     }
