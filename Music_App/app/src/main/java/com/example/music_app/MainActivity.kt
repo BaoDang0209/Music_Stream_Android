@@ -23,7 +23,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.toObjects
 
-
+/*
+* Author: Đỗ Huynh Bảo Đăng
+* Main fuction: Display song and setup recyclerview*/
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var categoryAdapter: CategoryAdapter

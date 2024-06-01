@@ -18,6 +18,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 
+/*
+* Author: Ngô Phạm Quang Vinh
+* Main fuction: Edit profile with Firebase*/
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
@@ -36,16 +39,16 @@ class ProfileActivity : AppCompatActivity() {
         binding.imgAvt.setOnClickListener {
             selectImage.launch("image/*")
         }
-        //Handle event node update records
+        // Xử lý sự kiện cập nhật thông tin người dùng
         binding.saveData.setOnClickListener {
             validateData()
         }
-        //Handle event node update records
-        binding.changePassword.setOnClickListener{
+        // Xử lý sự kiện đổi mật khẩu
+        binding.changePassword.setOnClickListener {
             val intent = Intent(this, ChangePasswordActivity::class.java)
             startActivity(intent)
         }
-        binding.backBtn.setOnClickListener{
+        binding.backBtn.setOnClickListener {
             finish()
         }
 
@@ -53,6 +56,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun validateData() {
+        // Kiểm tra dữ liệu nhập vào hợp lệ
         if (binding.userEmail.text.toString().isEmpty()
             || binding.userName.text.toString().isEmpty()
             || binding.userPhone.text.toString().isEmpty()
@@ -65,6 +69,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun uploadImage() {
+        // Hiển thị dialog loading và tải ảnh lên Firebase Storage
         Config.showDialog(this)
 
         val storageRef = FirebaseStorage.getInstance().getReference("profile")
@@ -86,6 +91,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun storeData(imageUrl: String) {
+        // Lưu thông tin người dùng vào Firebase Realtime Database
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
         val userRef = FirebaseDatabase.getInstance("https://music-stream-ef950-default-rtdb.asia-southeast1.firebasedatabase.app")
             .reference.child("users").child(userId)
@@ -108,6 +114,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun showUserInformation() {
+        // Hiển thị thông tin người dùng từ Firebase Realtime Database
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
 
         FirebaseDatabase.getInstance("https://music-stream-ef950-default-rtdb.asia-southeast1.firebasedatabase.app")

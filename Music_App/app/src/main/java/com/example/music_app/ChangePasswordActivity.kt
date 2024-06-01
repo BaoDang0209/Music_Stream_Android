@@ -7,6 +7,10 @@ import com.example.music_app.databinding.ActivityChangePasswordBinding
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
+
+/*
+* Author: Nguyễn Duy Mạnh
+* Main fuction: Change password*/
 class ChangePasswordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChangePasswordBinding
     private lateinit var auth: FirebaseAuth

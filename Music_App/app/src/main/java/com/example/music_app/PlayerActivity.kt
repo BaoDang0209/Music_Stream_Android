@@ -19,7 +19,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
-
+/*
+* Author: Đỗ Huynh Bảo Đăng
+* Main fuction: Display song and song player*/
 class PlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlayerBinding
@@ -87,10 +89,15 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun showGif(show: Boolean) {
+        // Hiển thị hoặc ẩn GIF phát nhạc
         binding.songGifImageView.visibility = if (show) View.VISIBLE else View.INVISIBLE
     }
 
+    /*
+* Author:Nguyễn Duy Mạnh
+* Main fuction: Remove song from favorite list*/
     private fun checkIfFavorite(song: SongModel) {
+        // Kiểm tra xem bài hát hiện tại có nằm trong danh sách yêu thích của người dùng hay không
         val currentUser = auth.currentUser ?: return
 
         val userId = currentUser.uid
@@ -105,6 +112,7 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun addSongToFavorites(song: SongModel) {
+        // Thêm bài hát vào danh sách yêu thích của người dùng
         val currentUser = auth.currentUser ?: return
 
         val userId = currentUser.uid
@@ -122,6 +130,7 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun removeSongFromFavorites(song: SongModel) {
+        // Xóa bài hát khỏi danh sách yêu thích của người dùng
         val currentUser = auth.currentUser ?: return
 
         val userId = currentUser.uid
@@ -139,12 +148,14 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun updateFavoriteIcon() {
+        // Cập nhật biểu tượng yêu thích trên nút yêu thích
         binding.favoriteBtn.setImageResource(
             if (isFavorite) R.drawable.ic_favorite_done else R.drawable.ic_favorite
         )
     }
 
     private fun showToast(message: String) {
+        // Hiển thị một thông báo ngắn
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

@@ -6,23 +6,31 @@ import androidx.media3.exoplayer.ExoPlayer
 import com.example.music_app.models.SongModel
 import com.google.firebase.firestore.FirebaseFirestore
 
+/*
+* Author: Đỗ Huynh Bảo Đăng
+* Main fuction:song player*/
 object MyExoplayer {
-    private var exoPlayer : ExoPlayer? = null
-    private var currentSong : SongModel? =null
+    // Khai báo ExoPlayer và biến lưu trữ bài hát hiện tại
+    private var exoPlayer: ExoPlayer? = null
+    private var currentSong: SongModel? = null
 
-    fun getCurrentSong() : SongModel?{
+    fun getCurrentSong(): SongModel? {
+        // Trả về bài hát hiện tại
         return currentSong
     }
 
-    fun getInstance() : ExoPlayer?{
+    fun getInstance(): ExoPlayer? {
+        // Trả về instance của ExoPlayer
         return exoPlayer
     }
-    fun startPlaying(context : Context, song : SongModel){
-        if(exoPlayer ==null)
-            exoPlayer = ExoPlayer.Builder(context).build()
 
-        if(currentSong !=song){
-            //Its a new song so start playing
+    fun startPlaying(context: Context, song: SongModel) {
+        // Bắt đầu phát bài hát
+        if (exoPlayer == null)
+            exoPlayer = ExoPlayer.Builder(context).build() // Tạo ExoPlayer nếu chưa có
+
+        if (currentSong != song) {
+            // Nếu bài hát mới khác với bài hát hiện tại, cập nhật bài hát hiện tại và bắt đầu phát
             currentSong = song
 
             currentSong?.url?.apply {
@@ -30,28 +38,26 @@ object MyExoplayer {
                 exoPlayer?.setMediaItem(mediaItem)
                 exoPlayer?.prepare()
                 exoPlayer?.play()
-
             }
         }
-
-
     }
-    fun updateCount(){
-        currentSong?.id?.let { id->
+
+    fun updateCount() {
+        // Cập nhật số lượt phát của bài hát hiện tại trên Firestore
+        currentSong?.id?.let { id ->
             FirebaseFirestore.getInstance().collection("songs")
                 .document(id)
                 .get().addOnSuccessListener {
                     var latestCount = it.getLong("count")
-                    if(latestCount==null){
+                    if (latestCount == null) {
                         latestCount = 1L
-                    }else{
-                        latestCount = latestCount+1
+                    } else {
+                        latestCount = latestCount + 1
                     }
 
                     FirebaseFirestore.getInstance().collection("songs")
                         .document(id)
                         .update(mapOf("count" to latestCount))
-
                 }
         }
     }

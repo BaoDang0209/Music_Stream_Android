@@ -1,5 +1,5 @@
 package com.example.music_app.models
-
+// Khởi tạo model
 data class SongModel(
     val id : String,
     val title : String,

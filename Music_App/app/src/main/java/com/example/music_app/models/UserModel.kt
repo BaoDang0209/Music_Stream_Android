@@ -1,5 +1,5 @@
 package com.example.music_app.models
-
+// Khởi tạo model
 data class UserModel(
     val fullname: String = "",
     val email: String = "",

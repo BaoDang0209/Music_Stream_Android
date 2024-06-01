@@ -7,6 +7,9 @@ import com.example.music_app.adapter.FavoritesListAdapter
 import com.example.music_app.databinding.ActivityFavoristSongsBinding
 import com.google.firebase.auth.FirebaseAuth
 
+/*
+* Author: Đỗ Huynh Bảo Đăng
+* Main fuction: Display song player*/
 class FavoristListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFavoristSongsBinding

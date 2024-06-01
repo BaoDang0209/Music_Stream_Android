@@ -11,6 +11,9 @@ import com.example.music_app.databinding.ActivitySignupBinding
 import com.google.firebase.auth.FirebaseAuth
 import java.util.regex.Pattern
 
+/*
+* Author: Ngô Phạm Quang Vinh
+* Main fuction: Signup with Firebase*/
 class SignupActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignupBinding
     private var isPasswordVisible: Boolean = false // Khai báo biến isPasswordVisible

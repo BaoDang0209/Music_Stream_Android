@@ -9,7 +9,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.music_app.adapter.SongsListAdapter
 import com.example.music_app.databinding.ActivitySongsListBinding
 import com.example.music_app.models.CategoryModel
-
+/*
+* Author:Nguyễn Duy Mạnh
+* Main fuction: Display song list in category and favorite list*/
 class SongsListActivity : AppCompatActivity() {
     companion object{
         lateinit var category : CategoryModel

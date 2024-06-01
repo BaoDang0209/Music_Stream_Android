@@ -12,13 +12,23 @@ import com.example.music_app.PlayerActivity
 import com.example.music_app.databinding.SongListItemRecyclerRowBinding
 import com.example.music_app.models.SongModel
 import com.google.firebase.firestore.FirebaseFirestore
+/*
+* Author: Nguyễn Duy Mạnh
+* Main fuction: Display song list in RecyclerView.
+* Get data from Firestore by songId.
+* Press song: play in PlayerActivity.
 
-class SongsListAdapter(private  val songIdList : List<String>) :
+* */
+class SongsListAdapter(private val songIdList: List<String>) :
     RecyclerView.Adapter<SongsListAdapter.MyViewHolder>() {
+    // Khởi tạo adapter với danh sách các songId
 
     class MyViewHolder(private val binding: SongListItemRecyclerRowBinding) : RecyclerView.ViewHolder(binding.root) {
-        //bind data with view
+        // ViewHolder để hiển thị một bài hát trong RecyclerView
+
         fun bindData(songId: String) {
+            // Lấy dữ liệu bài hát từ Firestore và gán cho các view trong ViewHolder
+            // Xử lý sự kiện nhấn vào bài hát để phát nhạc
             FirebaseFirestore.getInstance().collection("songs")
                 .document(songId).get()
                 .addOnSuccessListener {
@@ -32,7 +42,7 @@ class SongsListAdapter(private  val songIdList : List<String>) :
                             )
                             .into(binding.songCoverImageView)
                         binding.root.setOnClickListener {
-                            MyExoplayer.startPlaying(binding.root.context,song)
+                            MyExoplayer.startPlaying(binding.root.context, song)
                             it.context.startActivity(Intent(it.context, PlayerActivity::class.java))
                         }
                     }
@@ -41,15 +51,18 @@ class SongsListAdapter(private  val songIdList : List<String>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = SongListItemRecyclerRowBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        // Tạo một ViewHolder mới từ layout file
+        val binding = SongListItemRecyclerRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
+        // Trả về số lượng bài hát trong danh sách
         return songIdList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        // Gán dữ liệu cho ViewHolder tại vị trí position trong danh sách
         holder.bindData(songIdList[position])
     }
 }

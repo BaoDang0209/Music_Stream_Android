@@ -12,7 +12,9 @@ import com.example.music_app.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import java.util.regex.Pattern
 
-
+/*
+* Author: Ngô Phạm Quang Vinh
+* Main fuction: Login with Firebase*/
 
 class LoginActivity : AppCompatActivity() {
     lateinit var  binding: ActivityLoginBinding
