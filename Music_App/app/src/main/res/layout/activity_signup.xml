@@ -158,39 +158,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/radioEmail"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Send by Email"
-                android:checked="true"
-                android:buttonTint="@color/black"
-                android:background="@drawable/rounded_corner"
-             android:textColor="@color/black"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
-
-            <RadioButton
-                android:id="@+id/radioPhone"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Send by Phone Num"
-                android:buttonTint="@color/black"
-                android:background="@drawable/rounded_corner"
-                android:textColor="@color/black"/>
-        </RadioGroup>
-
-
-
     </LinearLayout>
 
 
