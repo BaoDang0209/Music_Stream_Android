@@ -24,7 +24,6 @@ class SignupActivity : AppCompatActivity() {
             val email = binding.emailEdittext.text.toString()
             val password = binding.passwordEdittext.text.toString()
             val confirmPassword = binding.confirmPasswordEdittext.text.toString()
-            val phoneNumber = binding.phoneEdittext.text.toString()
 
             // Kiểm tra email hợp lệ
             if (!Pattern.matches(Patterns.EMAIL_ADDRESS.pattern(), email)) {
@@ -60,11 +59,6 @@ class SignupActivity : AppCompatActivity() {
             if (email.isNotEmpty()) {
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     binding.emailEdittext.error = "Email không hợp lệ"
-                    return@setOnClickListener
-                }
-            } else if (phoneNumber.isNotEmpty()) {
-                if (!Patterns.PHONE.matcher(phoneNumber).matches()) {
-                    binding.phoneEdittext.error = "Số điện thoại không hợp lệ"
                     return@setOnClickListener
                 }
             }
