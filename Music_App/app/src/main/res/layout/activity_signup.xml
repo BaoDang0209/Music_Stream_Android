@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:hint="Email address"
             android:textColorHint="@color/black"
+            android:textColor="@color/textDark"
             android:padding="16dp"
             android:inputType="textEmailAddress"
             android:background="@drawable/rounded_corner"
@@ -65,6 +66,7 @@
             android:textColorHint="@color/black"
             android:padding="16dp"
             android:inputType="textPassword"
+            android:textColor="@color/textDark"
             android:background="@drawable/rounded_corner"
             android:id="@+id/password_edittext"/>
             <ImageButton
@@ -94,6 +96,7 @@
             android:layout_height="wrap_content"
             android:hint="Confirm Password"
             android:textColorHint="@color/black"
+            android:textColor="@color/textDark"
             android:padding="16dp"
             android:inputType="textPassword"
             android:background="@drawable/rounded_corner"
@@ -113,19 +116,6 @@
                 android:src="@drawable/ic_eye_closed" /> <!-- Adjust padding as needed -->
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="20dp"/>
-
-        <EditText
-            android:id="@+id/phoneEdittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone Number"
-            android:textColorHint="@color/black"
-            android:padding="16dp"
-            android:inputType="phone"
-            android:background="@drawable/rounded_corner"/>
 
         <View
             android:layout_width="match_parent"
@@ -158,39 +148,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/radioEmail"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Send by Email"
-                android:checked="true"
-                android:buttonTint="@color/black"
-                android:background="@drawable/rounded_corner"
-             android:textColor="@color/black"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
-
-            <RadioButton
-                android:id="@+id/radioPhone"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Send by Phone Num"
-                android:buttonTint="@color/black"
-                android:background="@drawable/rounded_corner"
-                android:textColor="@color/black"/>
-        </RadioGroup>
-
-
-
     </LinearLayout>
 
 

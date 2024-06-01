@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:hint="Email address"
             android:textColorHint="@color/black"
+            android:textColor="@color/textDark"
             android:padding="16dp"
             android:inputType="textEmailAddress"
             android:background="@drawable/rounded_corner"
@@ -66,6 +67,7 @@
                 android:layout_weight="1"
                 android:hint="Password"
                 android:inputType="textPassword"
+                android:textColor="@color/textDark"
                 android:padding="16dp"
                 android:textColorHint="@color/black"/>
 
